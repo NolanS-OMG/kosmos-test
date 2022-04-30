@@ -1,13 +1,264 @@
-body {
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-color: var(--background-color);
+  overflow-x: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+ul {
+  list-style: none;
+}
+
+:root {
+  --primary-color: #00c8ff;
+  --background-color: #e9fbff;
+
+  --shadow-color: #8be6ff;
+  --border-color: #ececec;
+
+  --submit-button-color: #00d26d;
+  --submit-button-color-dark: #005e30;
+  --submit-button-color-light: #29ff97;
+
+  --delete-button-color: #ff1e00;
+  --delete-button-color-dark: #560a00;
+  --delete-button-color-light: #ff7563;
+
+  --card-color: #ffea00;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  width: 100vw;
+  height: fit-content;
+}
+
+.container > h1 {
+  margin-top: 2vh;
+
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.container > form, .container > div {
+  display: flex;
+  flex-direction: column;
+
+  width: 65%;
+  height: fit-content;
+
+  padding: 15px;
+  margin: 5vh auto;
+
+  box-shadow: 0px 0px 1px var(--shadow-color);
+  border-radius: 13px;
+
+  background-color: #ffffff;
+}
+
+.container > form > h4 {
+  margin-bottom: 2vh;
+
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.input {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 12px 0px;
+  margin: 5px 0px;
+}
+
+.input * {
+  width: 45%;
+
+  padding: 0.3rem;
+
+  font-size: 1.05rem;
+}
+
+.radio-input {
+  display: flex;
+  flex-direction: column;
+
+  padding: 12px 0px;
+  margin: 5px 0px;
+
+  font-size: 1.05rem;
+}
+
+.radio-input * {
+  padding: 0.3rem;
+}
+
+.submit-button {
+  width: 35%;
+
+  margin: auto;
+  padding: 0.3rem;
+
+  border: solid 1px var(--submit-button-color-dark);
+  border-radius: 5px;
+  background-color: var(--submit-button-color);
+
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: #ffffff;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.submit-button:hover {
+  background-color: var(--submit-button-color-light);
+}
+
+.created-input {
+  display: flex;
+}
+
+.created-input > div {
+  width: 100%;
+  
+  margin: auto;
+  padding: 0.3rem;
+}
+
+.created-input > button {
+  width: fit-content;
+
+  margin: auto;
+  padding: 0.3rem;
+
+  border: solid 1px var(--delete-button-color-dark);
+  border-radius: 5px;
+  background-color: var(--delete-button-color);
+
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: #ffffff;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.created-input > button:hover {
+  background-color: var(--delete-button-color-light);
+}
+
+.created-radio-input > button {
+  height: calc(2*1.05rem);
+}
+
+.add-quit-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+
+  margin-left: 50%;
+}
+
+.add-quit-buttons button {
+  width: 35%;
+
+  margin-bottom: 15px;
+  padding: 0.3rem;
+
+  border-radius: 5px;
+
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: #ffffff;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.add-quit-buttons button:nth-child(1) {
+  border: solid 1px var(--submit-button-color-dark);
+  background-color: var(--submit-button-color);
+}
+.add-quit-buttons button:nth-child(1):hover {
+  background-color: var(--submit-button-color-light);
+}
+
+.add-quit-buttons button:nth-child(2) {
+  border: solid 1px var(--delete-button-color-dark);
+  background-color: var(--delete-button-color);
+}
+.add-quit-buttons button:nth-child(2):hover {
+  background-color: var(--delete-button-color);
+}
+
+.add-options {
+  border-top: solid 1px var(--border-color);
+  border-bottom: solid 1px var(--border-color);
+}
+
+.results-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  margin: 5vh 0px;
+}
+
+.results-container li {
+  display: flex;
+  flex-direction: column;
+
+  width: 30%;
+
+  margin: 3vh auto;
+
+  background-color: var(--card-color);
+  border: solid 1px black;
+  border-radius: 7px;
+}
+
+.results-container li > p {
+  margin: 5px 0.3rem;
+
+  text-align: justify;
+  font-size: 1.05rem;
+}
+
+.results-container li > button {
+  width: 45%;
+
+  margin: 15px auto;
+  padding: 0.3rem;
+
+  border: solid 1px var(--delete-button-color-dark);
+  background-color: var(--delete-button-color);
+  border-radius: 5px;
+
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: #ffffff;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.results-container li > button:hover {
+  background-color: var(--delete-button-color-light);
 }

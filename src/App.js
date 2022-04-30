@@ -1,8 +1,13 @@
-import MainFrom from './Components/MainForm.js'
+import InputsContainer from './Components/InputsContainer.js'
+import InputsCreator from './Components/InputsCreator.js';
 
 function App() {
   return (
-    <MainFrom/>
+    <div className='container'>
+      <h1>Crea tu propio form</h1>
+      <InputsCreator/>
+      <InputsContainer/>
+    </div>
   );
 }
 

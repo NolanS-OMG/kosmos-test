@@ -1,0 +1,25 @@
+{
+  "fields":[
+    {
+      "type": "text",
+      "field": "Ejemplo01",
+      "label": "Soy el label 01",
+      "isRequired": "true",
+      "value": ""
+    },
+    {
+      "type": "text",
+      "field": "Ejemplo02",
+      "label": "Soy el label 02",
+      "isRequired": "false",
+      "value": ""
+    },
+    {
+      "type": "text",
+      "field": "Ejemplo03",
+      "label": "Soy el label 03",
+      "isRequired": "true",
+      "value": ""
+    }
+  ]
+}
