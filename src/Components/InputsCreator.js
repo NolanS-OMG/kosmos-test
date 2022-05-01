@@ -28,21 +28,24 @@ const InputsCreator = () => {
   const [displayOptions, setDisplayOptions] = useState(false);
 
   const [options, setOptions] = useState( [{label:'', value:''}, {label:'', value:''}] );
+  const [optionsCopy, setOptionsCopy] = useState( [{label:'', value:''}, {label:'', value:''}] );
 
-  const optionsInputs = options.map( (option, index, options) => {
-    const updateOptions = (i, val) => {
-      let newOptions = [...options]
-      newOptions[i].value = val
-      newOptions[i].label = val
-      setOptions(newOptions);
+  const optionsInputs = optionsCopy.map( (option, index) => {
+    const updateFunc = (i, value) => {
+      let newOptions = [...options];
+      if (i < options.length) {
+        newOptions[i].value = value;
+        newOptions[i].label = value;
+        setOptions(newOptions);
+      } else {
+        for (let j = 0; j <= (i + 1 - options.length); j++) {
+          newOptions.push({label:'', value:''});
+        }
+        setOptions(newOptions);
+      }
     }
     return (
-      <div key={`${index+1}: ${option.value}`} className='input'>
-        <label>Opción {index+1}: </label>
-        <input value={option.value} onChange={(e) => {
-          updateOptions(index, e.target.value);
-        }} />
-      </div>
+      <InputsOfOptions key={`${index+1}: ${option.value}`} index={index} updateFunc={updateFunc}/>
     )
   } )
 
@@ -72,19 +75,19 @@ const InputsCreator = () => {
           value = {newInput.label}
         />
         <SelectInput
-        field = {
-          {
-            field:'type', 
-            options:[
-              {value:'text', label:'Texto'}, 
-              {value:'select', label:'Select'},
-              {value:'radio', label:'Radio'}
-            ]
+          field = {
+            {
+              field:'type', 
+              options:[
+                {value:'text', label:'Texto'}, 
+                {value:'select', label:'Select'},
+                {value:'radio', label:'Radio'}
+              ]
+            }
           }
-        }
-        label = 'Elija el tipo de campo'
-        updateFunc = {updateFunc}
-        value = {newInput.type}
+          label = 'Elija el tipo de campo'
+          updateFunc = {updateFunc}
+          value = {newInput.type}
         />
         <div className='add-options'
           style={{display:`${displayOptions ? 'block' : 'none' }`}}
@@ -95,14 +98,14 @@ const InputsCreator = () => {
             <button type='button' onClick={() => {
               let newOptions = [...options]
               newOptions.push({label:'', value:''});
-              setOptions(newOptions);
+              setOptionsCopy(newOptions);
             }}>Añadir</button>
 
             <button type='button' onClick={() => {
               if (options.length > 2) {
                 let newOptions = [...options]
                 newOptions.pop();
-                setOptions(newOptions);
+                setOptionsCopy(newOptions);
               }
             }}>Quitar</button>
           </div>
@@ -125,5 +128,23 @@ const InputsCreator = () => {
       </form>
   )
 }
+
+const InputsOfOptions = ( { index, updateFunc } ) => {
+  
+  const [optionValue, setOptionValue] = useState('');
+
+  useEffect( () => {
+    updateFunc(index, optionValue);
+  }, [optionValue, updateFunc, index] );
+    
+    return (
+      <div className='input'>
+        <label>Opción {index+1}: </label>
+        <input value={optionValue} onChange={(e) => {
+          setOptionValue(e.target.value);
+        }} />
+      </div>
+    )
+} 
 
 export default InputsCreator
