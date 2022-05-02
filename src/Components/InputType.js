@@ -5,7 +5,7 @@ const TextInput = ({field, label, isRequired=false, updateFunc, value}) => {
       <label>{label}: </label>
       <input 
       onChange={(e) => {
-        updateFunc(field, e.target.value);
+        updateFunc(typeof field === typeof '' ? {field:field} : field, e.target.value);
       }}
       value={value}
       required={isRequired} 
@@ -26,7 +26,7 @@ const SelectInput = ({field, label, isRequired=false, updateFunc, value}) => {
     <div className="input">
       <label>{label}: </label>
       <select required={isRequired} onChange={(e) => {
-        updateFunc(field.field, e.target.value);
+        updateFunc(field, e.target.value);
       }}>
         {options}
       </select>
@@ -40,7 +40,7 @@ const RatioInput = ({field, label, isRequired=false, updateFunc, value}) => {
     return (
       <div key={`${index}: ${option.value}`}>
         <input type='radio' name={field.field} value={option.value} onChange={(e) => {
-          updateFunc(field.field, e.target.value);
+          updateFunc(field, e.target.value);
         }}/>
         <label>{option.label}</label>
       </div>

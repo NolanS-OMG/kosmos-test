@@ -42,7 +42,7 @@ const InputsContainer = () => {
   const results = data.map( (entries, index1) => {
     const rows = entries.map( (entry, index2) => {
       return (
-        <p key={`Dato ${index1+1}, entrada ${index2+1}`}>{entry.field}: {entry.value}</p>
+        <p key={`Dato ${index1+1}, entrada ${index2+1}`}>{typeof entry.field === typeof '' ? entry.field : entry.field.field}: {entry.value}</p>
       )
     } )
     return (
@@ -79,7 +79,7 @@ const InputsContainer = () => {
       return (
         <div className='created-input' key = {`${index}: ${input.field.field}`}>
           <SelectInput
-            field = {input.field}
+            field = {{index:index, ...input.field}}
             label = {input.label}
             updateFunc = {updateFunc}
             value = {input.type}
@@ -96,7 +96,7 @@ const InputsContainer = () => {
       return (
         <div className='created-input created-radio-input' key = {`${index}: ${input.field.field}`}>
           <RatioInput
-          field = {input.field}
+          field = {{index:index, ...input.field}}
           label = {input.label}
           updateFunc = {updateFunc}
           value = {input.type}

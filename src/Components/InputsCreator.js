@@ -7,7 +7,7 @@ const InputsCreator = () => {
 
   const updateFunc = (field, value) => {
     let newInputClone = {...newInput};
-    newInputClone[field] = value;
+    newInputClone[field.field] = value;
     setNewInput(newInputClone);
   }
 
@@ -30,6 +30,10 @@ const InputsCreator = () => {
   const [options, setOptions] = useState( [{label:'', value:''}, {label:'', value:''}] );
   const [optionsCopy, setOptionsCopy] = useState( [{label:'', value:''}, {label:'', value:''}] );
 
+  useEffect( () => {
+    console.log(optionsCopy, options);
+  }, [options, optionsCopy] )
+
   const optionsInputs = optionsCopy.map( (option, index) => {
     const updateFunc = (i, value) => {
       let newOptions = [...options];
@@ -45,7 +49,7 @@ const InputsCreator = () => {
       }
     }
     return (
-      <InputsOfOptions key={`${index+1}: ${option.value}`} index={index} updateFunc={updateFunc}/>
+      <InputsOfOptions key={`${index+1}: Opciones`} index={index} updateFunc={updateFunc} />
     )
   } )
 
@@ -99,6 +103,7 @@ const InputsCreator = () => {
               let newOptions = [...options]
               newOptions.push({label:'', value:''});
               setOptionsCopy(newOptions);
+              setOptions(newOptions);
             }}>Añadir</button>
 
             <button type='button' onClick={() => {
@@ -106,6 +111,7 @@ const InputsCreator = () => {
                 let newOptions = [...options]
                 newOptions.pop();
                 setOptionsCopy(newOptions);
+                setOptions(newOptions);
               }
             }}>Quitar</button>
           </div>
@@ -130,18 +136,12 @@ const InputsCreator = () => {
 }
 
 const InputsOfOptions = ( { index, updateFunc } ) => {
-  
-  const [optionValue, setOptionValue] = useState('');
-
-  useEffect( () => {
-    updateFunc(index, optionValue);
-  }, [optionValue, updateFunc, index] );
     
     return (
       <div className='input'>
         <label>Opción {index+1}: </label>
-        <input value={optionValue} onChange={(e) => {
-          setOptionValue(e.target.value);
+        <input onChange={(e) => {
+          updateFunc(index, e.target.value);
         }} />
       </div>
     )
